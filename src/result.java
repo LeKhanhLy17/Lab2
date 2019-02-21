@@ -1,0 +1,50 @@
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet( urlPatterns = { "/result" })
+public class result extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter writer = resp.getWriter();
+        writer.println("<html>");
+        writer.println("<head>");
+        writer.println("<title></title></head>");
+        writer.println("<body><h1>Cộng 2 số</h1>");
+        writer.println("<table>");
+        writer.println("<table style = width: 500px>");
+        writer.println("<tr>");
+        writer.println("<td><input name='number1' cols='5' rows='1'></textarea/></td>");
+        writer.println("<td>+</td>");
+        writer.println("<td><textarea name='number2' cols='5' rows='1'></textarea></td>");
+        writer.println("<td><input type='button' value = 'Cộng'/></td>");
+        writer.println("</tr>");
+        writer.println("</table>");
+        writer.println("</body>");
+        writer.println("</html>");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        PrintWriter writer = resp.getWriter();
+        int result= Integer.parseInt(req.getParameter("number1"))  + Integer.parseInt(req.getParameter("number2"));
+        writer.println("<html>");
+        writer.println("<head>");
+        writer.println("<title></title>");
+        writer.println("</head>");
+        writer.println("<body>");
+        writer.println("<h1>Kết Quả</h1>");
+        writer.println("<h1>"+ result +"</h1>");
+        req.setAttribute("result",result);
+        writer.println("</body>");
+        writer.println("</html>");
+
+    }
+}
